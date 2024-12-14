@@ -1,74 +1,151 @@
-import { Image, StyleSheet, Platform } from 'react-native';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
+import { Image, StyleSheet, ImageBackground } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { GestureHandlerRootView, Pressable, TextInput } from 'react-native-gesture-handler';
 
 export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <GestureHandlerRootView style={{flex: 1}}>
+        <ImageBackground
+          source={require('@/assets/images/background.png')}
+          style={styles.background}
+          resizeMode='cover'
+        >
+          <ThemedView style={styles.logoView}>
+            <Image source={require('@/assets/images/logo-cine.png')} style={styles.logo} />
+            <ThemedText style={styles.titleText}>CINE REVIEW</ThemedText>
+          </ThemedView>
+
+          <ThemedView style={styles.bemVindoView}>
+            <ThemedText style={styles.bemVindo}>Bem Vindo!</ThemedText>
+          </ThemedView>
+
+          <ThemedView style={styles.inputView}>
+            <TextInput style={styles.inputs} placeholder='Usuário'></TextInput>
+            <TextInput style={styles.inputs} secureTextEntry={true} placeholder='Senha' ></TextInput>
+          </ThemedView>
+
+          <ThemedView style={styles.buttonsView}>
+             <Pressable style={styles.pressableEntrar} onPress={() => alert('Deu certo!')}>
+              <ThemedText
+                style={{color: '#FFFFFF',
+                        fontSize: 18,
+                        textAlign: 'center',
+                        fontFamily: 'Century Gothic'}}
+              >Entrar</ThemedText>
+            </Pressable>
+
+            <ThemedText style={{color: '#FFFFFF', fontSize: 12}}>Não possui conta?</ThemedText>
+
+            <Pressable style={styles.pressableCadastrar} onPress={() => alert('Deu certo!2')}>
+            <ThemedText
+                style={{color: '#FFFFFF',
+                        fontSize: 18,
+                        textAlign: 'center',
+                        fontFamily: 'Century Gothic'}}
+              >Cadastrar</ThemedText>
+            </Pressable>
+          </ThemedView>
+        </ImageBackground>
+    </GestureHandlerRootView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
+  background: {
+    height: "100%",
+    width: "100%",
+  },
+
+  logoView: {
+     width: "100%",
+     marginTop: 120,
+     backgroundColor: 'transparent',
+     display: 'flex',
+     flexDirection: 'column',
+     justifyContent: 'center',
+     alignItems: 'center',
+  },
+
+  logo: {
+    width: 150,
+    height: 150,
+  },
+
+  titleText: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    textShadowColor: '#FFFFFF',
+    textShadowRadius: 10,
+    fontSize: 24,
+    fontFamily: 'Century Gothic',
+  },
+
+  bemVindoView: {
+    width: "100%",
+    height: 'auto',
+    marginTop: 50,
+    display: 'flex',
+    justifyContent: 'center',
     alignItems: 'center',
-    gap: 8,
+    backgroundColor: 'transparent',
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+
+  bemVindo: {
+    fontFamily: 'Century Gothic',
+    color: '#FFFFFF',
+    fontSize: 35,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+
+  inputView: {
+    width: 414,
+    height: 150,
+    marginTop: 50,
+    backgroundColor: 'transparent',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+
+  inputs: {
+    width: 300,
+    backgroundColor: 'transparent',
+    color: '#FFFFFF',
+    padding: 20,
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: '#FFFFFF',
+  },
+
+  buttonsView: {
+    width: 414,
+    marginTop: 30,
+    backgroundColor: 'transparent',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+
+  pressableEntrar: {
+    marginBottom: 10,
+    backgroundColor: '#FFD700',
+    textAlign: 'center',
+    color: '#FFFFFF',
+    width: 300,
+    padding: 10,
+    borderRadius: 7,
+  },
+
+  pressableCadastrar: {
+    marginTop: 5,
+    backgroundColor: '#FF4500',
+    textAlign: 'center',
+    color: '#FFFFFF',
+    width: 300,
+    padding: 10,
+    borderRadius: 7,
   },
 });
